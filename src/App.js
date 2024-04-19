@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import DatePicker from './DatePicker';
 
 function App() {
+ 
+  const predefinedRanges = [
+    {
+      label: 'Last 7 days',
+      startDate: calculateStartDate(7),
+      endDate: new Date(),
+    },
+    {
+      label: 'Last 30 days',
+      startDate: calculateStartDate(30),
+      endDate: new Date(),
+    },
+  
+  ];
+
+  
+  function calculateStartDate(numDays) {
+    const today = new Date();
+    const startDate = new Date();
+    startDate.setDate(today.getDate() - numDays);
+    return startDate;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Business Date Range Picker</h1>
+      <DatePicker predefinedRanges={predefinedRanges} />
     </div>
   );
 }
